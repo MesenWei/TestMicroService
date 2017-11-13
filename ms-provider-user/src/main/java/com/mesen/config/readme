@@ -1,0 +1,1 @@
+1.有些配置，不建议被ComponentScan注解扫描到，我们统一采用注解的方式将不被扫描的类添加ExcludeFromComponentScan注解。

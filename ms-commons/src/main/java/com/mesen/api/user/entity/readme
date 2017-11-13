@@ -1,0 +1,1 @@
+1.所有interfacecontroller用到的实体，或者即将用到的实体，都要在commons中出现。

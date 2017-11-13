@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-commons" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-consumer-movie" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-consumer-movie-feign" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-consumer-movie-feign-customize" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-consumer-movie-ribbon" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-discovery-eureka" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-discovery-eureka-ha" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-provider-user" charset="UTF-8" />
+  </component>
+</project>

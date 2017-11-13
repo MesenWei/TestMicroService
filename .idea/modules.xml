@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/micro-service.iml" filepath="$PROJECT_DIR$/micro-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-commons/ms-commons.iml" filepath="$PROJECT_DIR$/ms-commons/ms-commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-consumer-movie/ms-consumer-movie.iml" filepath="$PROJECT_DIR$/ms-consumer-movie/ms-consumer-movie.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-consumer-movie-feign/ms-consumer-movie-feign.iml" filepath="$PROJECT_DIR$/ms-consumer-movie-feign/ms-consumer-movie-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-consumer-movie-feign-customize/ms-consumer-movie-feign-customize.iml" filepath="$PROJECT_DIR$/ms-consumer-movie-feign-customize/ms-consumer-movie-feign-customize.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-consumer-movie-ribbon/ms-consumer-movie-ribbon.iml" filepath="$PROJECT_DIR$/ms-consumer-movie-ribbon/ms-consumer-movie-ribbon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-discovery-eureka/ms-discovery-eureka.iml" filepath="$PROJECT_DIR$/ms-discovery-eureka/ms-discovery-eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-discovery-eureka-ha/ms-discovery-eureka-ha.iml" filepath="$PROJECT_DIR$/ms-discovery-eureka-ha/ms-discovery-eureka-ha.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-provider-user/ms-provider-user.iml" filepath="$PROJECT_DIR$/ms-provider-user/ms-provider-user.iml" />
+    </modules>
+  </component>
+</project>

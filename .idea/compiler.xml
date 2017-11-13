@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ms-commons" />
+        <module name="ms-consumer-movie" />
+        <module name="ms-consumer-movie-feign" />
+        <module name="ms-consumer-movie-feign-customize" />
+        <module name="ms-consumer-movie-ribbon" />
+        <module name="ms-discovery-eureka" />
+        <module name="ms-discovery-eureka-ha" />
+        <module name="ms-provider-user" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="micro-service" target="1.8" />
+      <module name="ms-commons" target="1.8" />
+      <module name="ms-consumer-movie" target="1.8" />
+      <module name="ms-consumer-movie-feign" target="1.8" />
+      <module name="ms-consumer-movie-feign-customize" target="1.8" />
+      <module name="ms-consumer-movie-ribbon" target="1.8" />
+      <module name="ms-discovery-eureka" target="1.8" />
+      <module name="ms-discovery-eureka-ha" target="1.8" />
+      <module name="ms-provider-user" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

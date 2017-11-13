@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: micro-server-eureka-ha
+
+security:
+  basic:
+    enabled: true
+  user:
+    name: admin
+    password: admin123
+
+#在yml中，---也是有作用的。
+#在单一文件中，可用连续三个连字号（---）区分多个文件。
+#另外，还有选择性的连续三个点号（ ... ）用来表示文件结尾。
+#
+---
+server:
+  port: 8761
+spring:
+  profiles: peer1
+eureka:
+  instance:
+    hostname: peer1
+    instance-id: ${spring.application.name}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://${security.user.name}:${security.user.password}@peer2:8762/eureka/,http://${security.user.name}:${security.user.password}@peer3:8763/eureka/
+---
+server:
+  port: 8762
+spring:
+  profiles: peer2
+eureka:
+  instance:
+    hostname: peer2
+    instance-id: ${spring.application.name}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://${security.user.name}:${security.user.password}@peer1:8761/eureka/,http://${security.user.name}:${security.user.password}@peer3:8763/eureka/
+---
+server:
+  port: 8763
+spring:
+  profiles: peer3
+eureka:
+  instance:
+    hostname: peer3
+    instance-id: ${spring.application.name}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://${security.user.name}:${security.user.password}@peer1:8761/eureka/,http://${security.user.name}:${security.user.password}@peer2:8762/eureka/

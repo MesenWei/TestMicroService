@@ -1,0 +1,26 @@
+server:
+  port: 7602
+
+eureka:
+  instance:
+      hostname: localhost
+      prefer-ip-address: true
+      instance-id: ${spring.application.name}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin123@localhost:8761/eureka
+    healthcheck:
+      enable: true
+
+spring:
+  application:
+    name: micro-server-movie-ribbon
+
+security:
+  basic:
+    enabled: false
+
+#Ribbon Client的配置文件位置方式：clientname.ribbon。clientname为spring.application.name。
+micro-server-movie-ribbon:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule

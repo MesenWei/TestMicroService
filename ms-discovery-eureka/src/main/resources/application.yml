@@ -1,0 +1,42 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    healthcheck:
+      enabled: true
+    #因为当前Eureka server是单机版的，所以registerWithEureka和fetchRegistry为false，其表示的是：
+    #告诉Eureka当前项目只是一个Eureka server，不要将当前项目当做一个client注册到其他Eureka server。
+    #因为如果Eureka server也做分布式的时候，多个Eureka server之间也是客户端和服务端的关系。
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      #defaultZone表示，将当前Eureka server注册到哪一个Eureka server中，因为是单机版的，所以注册到自己的Eureka server中。
+      defaultZone: http://${security.user.name}:${security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    #自我保护模式。默认true，开启。
+    #自我保护模式是一种应对网络异常的安全保护措施。它的架构哲学是宁可同时保留所有微服务（健康的微服务和不健康的微服务都会保留），也不盲目注销任何健康的微服务。
+    #使用自我保护模式，可以让Eureka集群更加的健壮、稳定。
+    #springcloud不建议我们去修改！
+#    enableSelfPreservation: false
+    #设置Eureka服务端对注册服务的清理间隔时间。单位毫秒，默认为60*1000（6秒）。
+    #springcloud不建议我们去修改！
+#    eviction-interval-timer-in-ms: 10000
+  dashboard:
+    enabled: true #false代表Eureka首页不能被访问。
+    path: /wms #原本的Eureka首页需加上/wms才能访问：http://localhost8761/wms。
+  environment: TEST
+  datacenter: cloud
+
+spring:
+  application:
+    name: micro-server-eureka
+
+security:
+  basic:
+    enabled: true
+  user:
+    name: admin
+    password: admin123

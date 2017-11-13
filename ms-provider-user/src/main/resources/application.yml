@@ -1,0 +1,66 @@
+server:
+  port: 7901
+
+#每个微服务可能同时有几十万个访问者，如果像之前tomcat一样，配置session半小时失效，那么
+#在30分钟内就有30*100000的session被存储在内存中，会造成内存不足的异常，所以要设置session为无状态。
+#只要是微服务，必须要设置其session为无状态。
+#默认情况下，sessions的状态是IF_REQUIRED。
+#session的无状态只会在在启用了security之后（enabled=true）才会有效。
+#综上所述，微服务的session状态必须为无状态，即必须开启security（enabled=true）。
+#我们应当为每一个微服务设置用户名和密码和session无状态。
+#每个配置文件里都写这些配置太麻烦，我们在WebSecurityConfig类中进行了java生命方式统一配置。
+#只要添加了spring-boot-starter-security的包，spring boot默认会输出默认用户名和密码。
+security:
+  basic:
+    #enabled=false时console会输出自定义的用户名和密码，但访问页面时不需要验证。
+    enabled: false
+#  sessions: stateless
+#  user:
+#    name: admin
+#    password: admin123
+
+eureka:
+  instance:
+    #可以去修改本地hosts文件，将localhost改为www.user-7901.com的格式。
+    hostname: localhost
+    #instance-id表示显示在Eureka中，服务对应的一个ID，也可以理解成服务的描述。
+    #在Eureka服务端首页中，则表示的是Instances currently registered with Eureka下status字段的值，也就是UP后面的内容。
+    instance-id: ${spring.application.name}:${server.port}
+    #如果只配置了instance-id，那么将鼠标悬停在UP后面的instance-id上时，左下角显示的仍然是instance-id的信息，而不是IP地址。
+    #但我们应当将其显示IP地址：
+    #1.为了更方便的查看服务的信息；
+    #2.在点击UP后面的instance-id是，跳转的连接应当为【IP:port】，如果不配置prefer-ip-address（默认值为false），跳转的连接为【用户名-主机名:prot】（很明显此链接不能正常跳转）。
+    prefer-ip-address: true
+    #默认值为：spring.application.name:unknown，是显示在Eureka服务端首页中，服务的名称。
+    #在没有配置appname的情况下，Eureka服务端首页默认显示的是spring.application.name。
+    #appname和spring.application.name的区别：eureka.instance.appname只在页面中显示，其他地方没有用到此名称；而spring.application.name在整个Eureka中，代表着微服务唯一标识的作用。
+#    appname: micro-server-user-haha
+    #设置Eureka客户端与Eureka服务端发送心跳的时间间隔。单位秒，默认为30秒。
+    #springcloud不建议我们去修改！
+#    lease-renewal-interval-in-seconds: 2
+    #此配置代表：Eureka在接受到上一次发送心跳之后至接受下一次发送心跳的时间。单位秒，默认为90秒。
+    #也就是说，Eureka在成功接收到当前客户端的心跳之后，仍然发送，发现发送后没有响应，此时，Eureka服务端不会讲此服务在注册列表中清除，而是继续发送心跳，
+    #频率肯定是lease-renewal-interval-in-seconds来配置的，如果发送心跳后仍然没有接收到响应，那么Eureka会一直发送，直到这个一直发送的时间超过此配置的时间而停止。
+    #springcloud不建议我们去修改！
+#    lease-expiration-duration-in-seconds: 15
+  client:
+    serviceUrl:
+      #Eureka客户端将要注册到的Eureka服务端的地址。
+      defaultZone: http://admin:admin123@localhost:8761/eureka
+      #测试Eureka高可用
+      #在高可用的Eureka服务集群中，虽然每个Eureka服务端的注册中心中有所有Eureka客户端的注册信息，
+      #但只有写了Eureka服务集群的每个服务，才达到了高可用的效果。
+#      defaultZone: http://peer1:8761/eureka,http://peer2:8761/eureka
+    healthcheck:
+      enable: true
+
+#这个应用的名称，此名称在springcloud中有唯一性。
+spring:
+  application:
+    name: micro-server-user
+
+#配置springboot的基本信息，可通过IP:port/servername/info进行查看。
+info:
+  app.name: 用户微服务
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$

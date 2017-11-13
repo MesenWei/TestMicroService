@@ -1,0 +1,17 @@
+server:
+  port: 7803
+
+eureka:
+  instance:
+      hostname: localhost
+      prefer-ip-address: true
+      instance-id: ${spring.application.name}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin123@localhost:8761/eureka
+    healthcheck:
+      enable: true
+
+spring:
+  application:
+    name: micro-server-movie-feign

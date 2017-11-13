@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ms-consumer-movie-ribbon:war">
+    <output-path>$PROJECT_DIR$/ms-consumer-movie-ribbon/target</output-path>
+    <root id="archive" name="ms-consumer-movie-ribbon-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="ms-consumer-movie-ribbon:war exploded" />
+    </root>
+  </artifact>
+</component>
