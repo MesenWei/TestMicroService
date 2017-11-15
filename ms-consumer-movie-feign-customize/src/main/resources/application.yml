@@ -1,6 +1,10 @@
 server:
   port: 7804
 
+security:
+  basic:
+    enabled: false
+
 eureka:
   instance:
       hostname: localhost
@@ -8,7 +12,7 @@ eureka:
       instance-id: ${spring.application.name}:${server.port}
   client:
     serviceUrl:
-      defaultZone: http://admin:admin123@localhost:8761/eureka
+      defaultZone: http://admin:admin123@peer1:8761/eureka
     healthcheck:
       enable: true
 
