@@ -1,0 +1,5 @@
+1.当@FeignClient作用在一个类上的时候，此类不能被@RequestMapping，否则会报错:
+        java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'com.mesen.api.user.interfacecontroller.HystrixUserFeignClient2' method
+  这种情况只会发生在FeignClient类与Fallback配合使用时发生，为了规范：
+  在Feign Client类上，不能使用RequestMapping注解。
+2.

@@ -26,7 +26,8 @@
         <module>ms-consumer-movie-feign-customize</module>
         <module>ms-discovery-eureka-ha</module>
         <module>ms2-hystrix-provider-user</module>
-    </modules>
+		<module>ms2-hystrix-consumer-movie-feign</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

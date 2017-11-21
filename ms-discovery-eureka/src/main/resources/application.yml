@@ -27,6 +27,7 @@ eureka:
   dashboard:
     enabled: true #false代表Eureka首页不能被访问。
     path: /wms #原本的Eureka首页需加上/wms才能访问：http://localhost8761/wms。
+  #environment和datacenter时用来配置Eureka首页左上角信息的。
   environment: TEST
   datacenter: cloud
 

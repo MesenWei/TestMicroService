@@ -1,0 +1,29 @@
+server:
+  port: 7902
+security:
+  basic:
+    enabled: false
+
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin123@localhost:8761/eureka
+    healthcheck:
+      enable: true
+
+spring:
+  application:
+    name: micro-server2-hystrix-user
+
+info:
+  app.name: 用户微服务
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
+#在访问被HystrixCommand注解修饰的方法时，如果该方法在hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds设置的时间内没有响应，
+#那么Hystrix会启动熔断机制，调用Fallback方法。
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 5000
