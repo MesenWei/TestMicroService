@@ -6,8 +6,8 @@ import java.io.Serializable;
  * Created by maosheng on 2017/11/15
  */
 public class PageVo<T> implements Serializable{
+    private String serverId ;
     private String code = "-1";
-    private String serverId ;//TODO 获取serverId
     private String msg = "服务器异常";
     private T data;
 
@@ -26,9 +26,9 @@ public class PageVo<T> implements Serializable{
         this.msg = msg;
     }
 
-    public PageVo(String code, String serverId, String msg) {
-        this.code = code;
+    public PageVo(String serverId, String code, String msg) {
         this.serverId = serverId;
+        this.code = code;
         this.msg = msg;
     }
 

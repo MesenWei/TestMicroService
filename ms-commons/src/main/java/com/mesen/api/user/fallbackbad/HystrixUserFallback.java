@@ -1,5 +1,6 @@
-package com.mesen.api.user.interfacecontroller;
+package com.mesen.api.user.fallbackbad;
 
+import com.mesen.api.user.interfacecontroller.HystrixUserFeignClient2;
 import com.mesen.vo.PageVo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;

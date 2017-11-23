@@ -1,6 +1,7 @@
 package com.mesen.controller;
 
 import com.mesen.api.user.entity.User;
+import com.mesen.commons.timeoutfallback.TimeoutFallback;
 import com.mesen.vo.PageVo;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
-public class UserTestController {
+public class UserTestController extends TimeoutFallback{
 
     /**
      * 在类中增加熔断是的回调方法。
@@ -59,7 +60,7 @@ public class UserTestController {
      * @return
      */
     @GetMapping("getuserlistbad3")
-    @HystrixCommand(fallbackMethod = "fallbackForService")
+    @HystrixCommand(fallbackMethod = "timeoutFallback")
     public PageVo getUserListBad3(Long id){
         PageVo userListGood = getUserListGood(id);
 
@@ -82,7 +83,5 @@ public class UserTestController {
         return new PageVo(list);
     }
 
-    public PageVo fallbackForService(Long id){
-        return new PageVo("1","逻辑出现了问题，超时。嘿哈哦哦哦");
-    }
+
 }

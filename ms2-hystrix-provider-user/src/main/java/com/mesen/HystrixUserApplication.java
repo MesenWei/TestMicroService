@@ -33,6 +33,7 @@ import org.springframework.context.annotation.FilterType;
  * 		服务端返回给客户端的错误信息（异常，超时，宕机），客户端要通过try catch来处理。
  *
  * 	0：ok（VO默认）；-1：宕机（Fallback默认）；-2：超时；大于0，其他异常。
+ *  异常message定义：服务ID#异常code#异常描述
  *
  * 实现熔断机制，有三种方式：
  * 1.在方法上使用注解HystrixCommand： @HystrixCommand(fallbackMethod = "fallbackForService")

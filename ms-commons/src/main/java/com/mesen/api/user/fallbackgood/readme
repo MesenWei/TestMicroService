@@ -1,0 +1,1 @@
+我们应（建议）使用FallbackFactory的方式来实现熔断机制。
