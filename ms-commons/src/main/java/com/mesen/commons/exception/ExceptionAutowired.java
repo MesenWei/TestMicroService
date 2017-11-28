@@ -30,37 +30,57 @@ public class ExceptionAutowired {
         return this.serverId;
     }
 
-    private boolean isAutoException(Throwable throwable){
-        if(!(throwable instanceof MyRuntimeException))
-            return true;
-
-        return false;
-    }
-
     public PageVo autoWired(Optional<Throwable> optional){
-        Throwable throwable = optional.get();
         try {
-            throw throwable;
+            throw optional.get();
         } catch (RetryableException e){
-            String msg = e.getMessage();
-            String host = UrlUtil.getHost(Optional.of(msg));
-            return new PageVo(getServerId(),"-1",host + "服务器宕机！");
+            return serverDown(e);
         } catch (HystrixTimeoutException e) {
-            return new PageVo(getServerId(),"-2","线程执行超时！");
+            return feignHystrixTimeout(e);
+        } catch (MyRuntimeException e) {
+            return customizeException(e);
         } catch (MyException e) {
-            String[] split = splitExceptionMsg(throwable.getMessage());
-
-            if(ArrayUtils.isEmpty(split) || split.length < 3)
-                throw new MyRuntimeException("异常信息中必须包含三部分内容且用#隔开：服务ID#异常code#异常描述");
-
-            return new PageVo(
-                    StringUtils.isNotBlank(split[0]) ? split[0] : null,
-                    StringUtils.isNotBlank(split[1]) ? split[1] : null,
-                    StringUtils.isNotBlank(split[2]) ? split[2] : null);
+            return customizeException(e);
         } catch (Throwable e) {
             e.printStackTrace();
-            return new PageVo(getServerId(),"-3","一个controller未捕获的未知异常！");
+            return unDisposeException();
         }
+    }
+
+    private PageVo serverDown(RetryableException e){
+        String msg = e.getMessage();
+        String host = UrlUtil.getHost(Optional.of(msg));
+        return new PageVo(getServerId(),"-1",host + "服务器宕机！");
+    }
+
+    private PageVo feignHystrixTimeout(HystrixTimeoutException e){
+        return new PageVo(getServerId(),"-2","线程执行超时！");
+    }
+
+    private PageVo customizeException(MyException e){
+        return customizeException(e,null);
+    }
+
+    private PageVo customizeException(MyRuntimeException e){
+        return customizeException(null,e);
+    }
+
+    private PageVo customizeException(MyException e1,MyRuntimeException e2){
+        Throwable throwable = null != e1 ? e1 : e2;
+
+        String[] split = splitExceptionMsg(throwable.getMessage());
+
+        if(ArrayUtils.isEmpty(split) || split.length < 3)
+            throw new MyRuntimeException("异常信息中必须包含三部分内容且用#隔开：服务ID#异常code#异常描述");
+
+        return new PageVo(
+                StringUtils.isNotBlank(split[0]) ? split[0] : null,
+                StringUtils.isNotBlank(split[1]) ? split[1] : null,
+                StringUtils.isNotBlank(split[2]) ? split[2] : null);
+    }
+
+    private PageVo unDisposeException(){
+        return new PageVo(getServerId(),"-3","一个controller未捕获的未知异常！");
     }
 
     private String[] splitExceptionMsg(String msg){

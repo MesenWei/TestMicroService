@@ -3,6 +3,8 @@ package com.mesen.vo;
 import java.io.Serializable;
 
 /**
+ * TODO 是否设置成单例模式，单例模式有什么好处；是否用spring管理；serverId自动获取。
+ *
  * Created by maosheng on 2017/11/15
  */
 public class PageVo<T> implements Serializable{

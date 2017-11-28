@@ -22,18 +22,18 @@ import org.springframework.context.annotation.FilterType;
  * 			B对C返回的结果尽心处理，B处理完成后在返回给A。
  *
  * 熔断有两种机制：
- * 		1.服务端失败回调-UserFallckback
+ * 		1.服务端失败回调-Hystrix提供的Fallckback
  * 			服务端失败回调的是服务端的Fallback。
  * 			使用Fallback两个优点：
  * 				a.可以处理线程执行超时情况；
  * 				b.A->B->C-D，D出现异常使用了Fallback机制时，C->B->A的异常传递不用我们去处理，Hystrix帮我们出来了。
- * 				  但我们仍要自行捕获异常，因为这样异常信息对我们来讲才是可控的。
+ * 				  （如果不用Fallback机制，我们需要每一个异常都要判断异常信息来做出相应的动作）。
+ * 				  但我们仍要自行捕获异常（捕获了需要再抛出，实质是抛给了Hystrix的Fallback方法），因为这样异常信息对我们来讲才是可控的。
  *
  * 		2.服务端宕机回调-服务降级
- * 			服务端宕机后，是客户端的Hystrix来处理的，回调的是客户端的Fallback。
- * ==============
- * 		服务端返回给客户端的错误信息（异常，超时，宕机），客户端要通过try catch来处理。
+ * 			服务端宕机后，是客户端的Feign提供的熔断机制来处理的，回调的是Feign的FallbackFactory。
  *
+ * 异常编码定义：
  * 	0：ok（VO默认）；-1：宕机（Fallback默认）；-2：超时；大于0，其他异常；-3：controller未捕获异常，未知异常。
  *  异常message定义：服务ID#异常code#异常描述
  *
@@ -43,7 +43,8 @@ import org.springframework.context.annotation.FilterType;
  * 		b.当HystrixCommand注解修饰的方法，长时间未响应时（时间多少是在yml文件中配置的），也会调用fallbackMethod。
  * 2.与Feign整合，在Feign Client的类上添加注解：@FeignClient(name = "micro-server2-hystrix-user",fallback = HystrixUserFallback.class)
  * 		这种配置方式的缺点是，无法动态返回异常信息。
- * 3.与Feign整合，使用FallbackFactory，TODO
+ * 3.与Feign整合，使用FallbackFactory。FallbackFactory也是Feign提供的熔断机制。可以自动处理Feign Client请求到的异常，
+ * 	 主要包括服务端抛出的异常，和服务端宕机。
  *
  * Created by maosheng on 2017/11/15
  */
