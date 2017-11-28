@@ -1,7 +1,8 @@
 package com.mesen.controller;
 
 import com.mesen.api.user.entity.User;
-import com.mesen.commons.timeoutfallback.TimeoutFallback;
+import com.mesen.commons.exception.MyRuntimeException;
+import com.mesen.commons.fallbackfactory.ControllerCommonFallback;
 import com.mesen.vo.PageVo;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
-public class UserTestController extends TimeoutFallback{
-
+public class UserTestController extends ControllerCommonFallback {
     /**
      * 在类中增加熔断是的回调方法。
      * 如果添加try.catch语句，则Fallback回调方法无效。
@@ -44,11 +44,15 @@ public class UserTestController extends TimeoutFallback{
      * @return
      */
     @GetMapping("getuserlistbad2")
+    @HystrixCommand(defaultFallback = "controllerFbMethod")
     public PageVo getUserListBad2(Long id){
         PageVo userListGood = getUserListGood(id);
-
-        if(true)
-            throw new RuntimeException("");
+        try{
+            if(true)
+                throw new MyRuntimeException("USER#1#我疯狂的出了个错！");
+        } catch (MyRuntimeException e){
+            throw new MyRuntimeException("USER#1#我疯狂疯狂疯狂疯狂的出了个错！");
+        }
 
         return userListGood;
     }
@@ -56,14 +60,20 @@ public class UserTestController extends TimeoutFallback{
     /**
      * 验证访问超时情况。
      *
+     * 测试发现
+     *      1.在方法上加了HystrixCommand注解，虽然try catch 能捕获异常，使Fallback不生效，但是在方法运算超时的情况下，
+     *      Fallback仍然有效，不知道这是bug，还是特有功能。
+     *      2.HystrixCommand中的属性fallbackMethod是Fallback的回调函数，要求此函数的参数必须与HystrixCommand修饰的方法的参数一致，
+     *      但，如果将fallbackMethod换成defaultFallback，此时，无论HystrixCommand修饰的方法的参数是什么，
+     *      Fallback回调函数的参数为空即可正常回调，不知道这是bug，还是特有功能。
+     *
      * @param id
      * @return
      */
     @GetMapping("getuserlistbad3")
-    @HystrixCommand(fallbackMethod = "timeoutFallback")
+    @HystrixCommand(defaultFallback = "controllerFbMethod")
     public PageVo getUserListBad3(Long id){
         PageVo userListGood = getUserListGood(id);
-
         try {
             Thread.sleep(6000L);
         } catch (InterruptedException e) {
@@ -82,6 +92,5 @@ public class UserTestController extends TimeoutFallback{
 
         return new PageVo(list);
     }
-
 
 }

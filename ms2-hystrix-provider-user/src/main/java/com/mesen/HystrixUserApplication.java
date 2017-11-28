@@ -12,8 +12,8 @@ import org.springframework.context.annotation.FilterType;
  * 错误在微服务之间的存在有两种类型，一种是Exception（访问超时也认为是Exception），一种是服务宕机了。
  * A->B->C-D
  * 		D出现了Exception：
- * 			D出现了Exception，则D有Fallback回调机制，会调用对应的方法，将错误信息返回给C，此时C应当对D返回的信息做判断处理，
- * 			C处理完成后，将结果返回给B，B对C返回的结果进行处理，B处理完成后再返回给A。
+ * 			D出现了Exception，则D有Fallback回调机制，会调用对应的方法，将错误信息返回给C，因为我们用了Fallback机制，所以C的Hystrix自动识别了D的错误信息，
+ * 			C自动将错误信息返回给B，因为B也使用了Fallback机制，所以B的Hystrix自动处理C的错误信息，B自动将错误信息再返回给A。
  * 		D服务挂掉了：
  * 			D服务挂掉后（D端的Fallback回调机制肯定无效了），因在C服务上也实现了熔断机制，故C可以快速处理这种情况，而不是像一前一样要等很久。
  * 			C将错误信息返回给B
@@ -24,15 +24,17 @@ import org.springframework.context.annotation.FilterType;
  * 熔断有两种机制：
  * 		1.服务端失败回调-UserFallckback
  * 			服务端失败回调的是服务端的Fallback。
- * 			服务端失败回调的机制中，对于Exception，我们不使用Fallback，所以在controller中，我们依然使用try catch的方式来捕获业务层的异常；
- * 			但是，对于服务端被访问超时（即处理客户端请求时间过长）时，我们使用Fallback机制。
+ * 			使用Fallback两个优点：
+ * 				a.可以处理线程执行超时情况；
+ * 				b.A->B->C-D，D出现异常使用了Fallback机制时，C->B->A的异常传递不用我们去处理，Hystrix帮我们出来了。
+ * 				  但我们仍要自行捕获异常，因为这样异常信息对我们来讲才是可控的。
  *
  * 		2.服务端宕机回调-服务降级
  * 			服务端宕机后，是客户端的Hystrix来处理的，回调的是客户端的Fallback。
  * ==============
  * 		服务端返回给客户端的错误信息（异常，超时，宕机），客户端要通过try catch来处理。
  *
- * 	0：ok（VO默认）；-1：宕机（Fallback默认）；-2：超时；大于0，其他异常。
+ * 	0：ok（VO默认）；-1：宕机（Fallback默认）；-2：超时；大于0，其他异常；-3：controller未捕获异常，未知异常。
  *  异常message定义：服务ID#异常code#异常描述
  *
  * 实现熔断机制，有三种方式：

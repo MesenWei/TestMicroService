@@ -22,3 +22,5 @@ eureka:
 spring:
   application:
     name: micro-server2-hystrix-movie-feign
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 5000

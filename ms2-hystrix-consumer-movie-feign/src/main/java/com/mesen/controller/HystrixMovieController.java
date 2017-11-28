@@ -3,7 +3,7 @@ package com.mesen.controller;
 import com.mesen.api.user.interfacecontroller.HystrixUserFeignClient;
 import com.mesen.api.user.interfacecontroller.HystrixUserFeignClient2;
 import com.mesen.api.user.interfacecontroller.HystrixUserFeignClient3;
-import com.mesen.commons.timeoutfallback.TimeoutFallback;
+import com.mesen.commons.fallbackfactory.ControllerCommonFallback;
 import com.mesen.vo.PageVo;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping({"/movie"})
-public class HystrixMovieController extends TimeoutFallback{
+public class HystrixMovieController extends ControllerCommonFallback {
     @Autowired
     private HystrixUserFeignClient hystrixUserFeignClient;
     @Autowired
@@ -60,7 +60,7 @@ public class HystrixMovieController extends TimeoutFallback{
      * @return
      */
     @GetMapping("testfactorydown")
-    @HystrixCommand(fallbackMethod = "timeoutFallback")
+    @HystrixCommand(defaultFallback = "controllerFbMethod")
     public PageVo testFactoryDown(){
         PageVo userListGood = null;
         try{
@@ -77,7 +77,7 @@ public class HystrixMovieController extends TimeoutFallback{
      * @return
      */
     @GetMapping("testfactorytimeout")
-    @HystrixCommand(defaultFallback = "timeoutFallback")
+    @HystrixCommand(defaultFallback = "controllerFbMethod")
     public PageVo testFactoryTimeout(String id){
         PageVo userListGood = null;
         try{
