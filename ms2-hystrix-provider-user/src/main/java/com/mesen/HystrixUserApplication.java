@@ -37,14 +37,19 @@ import org.springframework.context.annotation.FilterType;
  * 	0：ok（VO默认）；-1：宕机（Fallback默认）；-2：超时；大于0，其他异常；-3：controller未捕获异常，未知异常。
  *  异常message定义：服务ID#异常code#异常描述
  *
- * 实现熔断机制，有三种方式：
- * 1.在方法上使用注解HystrixCommand： @HystrixCommand(fallbackMethod = "fallbackForService")
- * 		a.这种使用方式类似于try catch语句。
- * 		b.当HystrixCommand注解修饰的方法，长时间未响应时（时间多少是在yml文件中配置的），也会调用fallbackMethod。
- * 2.与Feign整合，在Feign Client的类上添加注解：@FeignClient(name = "micro-server2-hystrix-user",fallback = HystrixUserFallback.class)
- * 		这种配置方式的缺点是，无法动态返回异常信息。
- * 3.与Feign整合，使用FallbackFactory。FallbackFactory也是Feign提供的熔断机制。可以自动处理Feign Client请求到的异常，
- * 	 主要包括服务端抛出的异常，和服务端宕机。
+ * 有两个技术实现了熔断机制：
+ * 		a.springcloud的circuitbreaker-fallback；
+ * 		b.Feign客户端的FeignClient-fallbackFactory。
+ * 具体实现方式有三种：
+ * 	fallback-保护服务端
+ * 		1.在方法上使用注解HystrixCommand： @HystrixCommand(fallbackMethod = "fallbackForService")
+ * 			a.这种使用方式类似于try catch语句。
+ * 			b.当HystrixCommand注解修饰的方法，长时间未响应时（时间多少是在yml文件中配置的），也会调用fallbackMethod。
+ * 		2.与Feign整合，在Feign Client的类上添加注解：@FeignClient(name = "micro-server2-hystrix-user",fallback = HystrixUserFallback.class)
+ * 			这种配置方式的缺点是，无法动态返回异常信息。
+ * 	fallbackFactory-保护Feign客户端
+ * 		3.与Feign整合，使用FallbackFactory。FallbackFactory也是Feign提供的熔断机制。可以自动处理Feign Client请求到的异常，
+ * 	 		主要包括服务端抛出的异常，和服务端宕机。
  *
  * Created by maosheng on 2017/11/15
  */

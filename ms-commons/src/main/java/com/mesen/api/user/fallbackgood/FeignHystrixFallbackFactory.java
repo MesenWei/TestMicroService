@@ -1,6 +1,7 @@
 package com.mesen.api.user.fallbackgood;
 
 import com.mesen.api.user.interfacecontroller.HystrixUserFeignClient3;
+import com.mesen.commons.exception.ExceptionAutowired;
 import com.mesen.commons.fallbackfactory.ControllerCommonFallback;
 import com.mesen.vo.PageVo;
 import feign.hystrix.FallbackFactory;
@@ -14,7 +15,7 @@ import java.util.Optional;
  * Created by maosheng on 2017/11/22
  */
 @Component
-public class HystrixFallbackFactory extends ControllerCommonFallback implements FallbackFactory<HystrixUserFeignClient3>{
+public class FeignHystrixFallbackFactory extends ExceptionAutowired implements FallbackFactory<HystrixUserFeignClient3>{
     @Override
     public HystrixUserFeignClient3 create(Throwable throwable) {
 
