@@ -1,5 +1,6 @@
 server:
   port: 7902
+
 security:
   basic:
     enabled: false

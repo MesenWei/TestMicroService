@@ -27,7 +27,9 @@
         <module>ms-discovery-eureka-ha</module>
         <module>ms2-hystrix-provider-user</module>
 		<module>ms2-hystrix-consumer-movie-feign</module>
-	</modules>
+        <module>ms3-hystrix-dashboard</module>
+        <module>ms3-hystrix-turbine</module>
+    </modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -55,6 +57,12 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>3.7</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.yaml</groupId>
+				<artifactId>snakeyaml</artifactId>
+				<version>1.19</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

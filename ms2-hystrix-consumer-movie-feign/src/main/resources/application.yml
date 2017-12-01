@@ -1,8 +1,9 @@
 server:
   port: 7805
+
 security:
   basic:
-    enabled: false
+    enabled: true
 
 feign:
   hystrix:

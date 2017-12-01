@@ -1,0 +1,23 @@
+server:
+  port: 7802
+
+spring:
+  application:
+    name: micro-server3-turbine
+
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin123@localhost:8761/eureka
+    healthcheck:
+      enable: true
+
+turbine:
+  appConfig: micro-server2-hystrix-user,micro-server2-hystrix-movie-feign
+  aggregator:
+    clusterConfig: default
+  clusterNameExpression: new String("default")
