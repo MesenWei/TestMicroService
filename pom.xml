@@ -29,6 +29,7 @@
 		<module>ms2-hystrix-consumer-movie-feign</module>
         <module>ms3-hystrix-dashboard</module>
         <module>ms3-hystrix-turbine</module>
+        <module>ms4-zuul</module>
     </modules>
 
 	<properties>

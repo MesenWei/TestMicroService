@@ -66,6 +66,8 @@ public class ReadConfigFilesUtil {
 
         Object obj = map;
         for (String s : str) {
+            if(null == obj)
+                break;
             obj = ((Map)obj).get(s);
         }
 

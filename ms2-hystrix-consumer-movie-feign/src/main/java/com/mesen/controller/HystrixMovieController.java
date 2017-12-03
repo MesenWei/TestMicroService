@@ -1,5 +1,6 @@
 package com.mesen.controller;
 
+import com.mesen.api.user.entity.User;
 import com.mesen.api.user.interfacecontroller.HystrixUserFeignClient;
 import com.mesen.api.user.interfacecontroller.HystrixUserFeignClient2;
 import com.mesen.api.user.interfacecontroller.HystrixUserFeignClient3;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -86,6 +89,18 @@ public class HystrixMovieController extends ControllerCommonFallback {
 
         }
         return userListGood;
+    }
+
+    @GetMapping("getlocal")
+    @HystrixCommand(defaultFallback = "controllerFbMethod")
+    public PageVo getLocal(Long id){
+        User user = new User(id,"a");
+        User user2 = new User(id+1,"b");
+        User user3 = new User(id+2,"c");
+        User user4 = new User(id+3,"c");
+        List<User> list = Arrays.asList(user,user2,user3,user4);
+
+        return new PageVo(list);
     }
 
     public PageVo fallback(Long id){

@@ -84,7 +84,8 @@ public class UserTestController extends ControllerCommonFallback {
     }
 
     @GetMapping("getuserlistgood")
-    public PageVo<List<User>> getUserListGood(Long id){
+    @HystrixCommand(defaultFallback = "controllerFbMethod")
+    public PageVo getUserListGood(Long id){
         User user = new User(id,"a");
         User user2 = new User(id+1,"b");
         User user3 = new User(id+2,"c");

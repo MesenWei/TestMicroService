@@ -35,6 +35,11 @@
             <artifactId>spring-cloud-netflix-turbine</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.mesen</groupId>
+            <artifactId>ms-commons</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -3,7 +3,7 @@ server:
 
 security:
   basic:
-    enabled: false
+    enabled: true
 
 eureka:
   instance:

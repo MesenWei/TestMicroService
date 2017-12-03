@@ -5,6 +5,14 @@ spring:
   application:
     name: micro-server3-turbine
 
+#在使用Turbine监控有安全认证的微服务时，添加此配置，才可以使Turbine正常监控。
+security:
+  ignored:
+  - /hystrix.stream
+  - /turbine.stream
+
+#Turbine监控微服务，需要Eureka的支持，因为她是从Eureka中获取的微服务的基本信息。
+#但是其SpringBoot启动类上不用添加EnableDiscoveryClient注解，因为Turbine的TurbineHttpConfiguration已经添加了。
 eureka:
   instance:
     hostname: localhost

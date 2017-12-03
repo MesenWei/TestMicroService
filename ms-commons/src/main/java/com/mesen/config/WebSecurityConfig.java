@@ -8,6 +8,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -65,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * 设置session为无状态，默认为无状态。
+     * 为请求设置session为无状态，默认为无状态。
      * @param http
      * @throws Exception
      */
@@ -80,4 +81,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 所有的Rest服务一定要设置为无状态，以提升操作性能
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
+
+    /**
+     * Turbine无法监控有权限验证的服务，
+     * 故，我们要把带有/hystrix.stream或者/turbine.stream的请求忽略掉权限验证。
+     * 这是一种不推荐的做法，是一种这种的办法。
+     * 我们还可以在Turbine所在的yml中进行此项配置。
+     * 虽然这两种方式都是不推荐的，相比之下，写在yml中会更好。
+     *
+     * @param web
+     * @throws Exception
+     */
+    /*@Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/hystrix.stream","/turbine.stream") ;
+    }*/
 }
