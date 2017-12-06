@@ -33,8 +33,14 @@ zuul:
   #二，
   routes:
     user:
-      path: /user/**
+      path: /usr/**
       serviceId: micro-server2-hystrix-user
+    movie:
+      path: /mvi/**
+      serviceId: micro-server2-hystrix-movie-feign
+    upload:
+      path: /ul/**
+      serviceId: micro-upload
 
   #三，
   #此种方式的请求，不会被HystrixComond监控，同时不会被ribbon进行负载均衡。
