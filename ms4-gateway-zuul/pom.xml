@@ -35,6 +35,11 @@
             <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.mesen</groupId>
+            <artifactId>ms-commons</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

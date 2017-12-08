@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.turbine.EnableTurbine;
 
 /**
+ * 请求地址：http://localhost:7802/turbine.stream。
  *
  * Created by maosheng on 2017/12/1
  */

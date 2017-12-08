@@ -3,7 +3,20 @@ server:
 
 spring:
   application:
-    name: micro-server3-gateway-zuul
+    name: micro-server4-gateway-zuul
+
+#zuul上传大文件时，处理时间较长，会出现timeout异常，
+#添加下面两个配置即可解决问题，这是官方提供的解决方案。
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
 
 #因为Zuul也需要配置高可用，所以必然用到服务发现组件Eureka。
 eureka:
@@ -26,21 +39,22 @@ zuul:
   #/user/**，匹配碎一层，即/user/x/x/......
   #routes的使用方式有三种方式（不推荐第三种）：
   #一，
-#  routes:
-#    micro-server2-hystrix-user: /user/**
-#    micro-server2-hystrix-movie-feign: /movie/**
+  routes:
+    micro-server2-hystrix-user: /user/**
+    micro-server2-hystrix-movie-feign: /movie/**
+    micro-server4-upload: /ul/**
 
   #二，
-  routes:
-    user:
-      path: /usr/**
-      serviceId: micro-server2-hystrix-user
-    movie:
-      path: /mvi/**
-      serviceId: micro-server2-hystrix-movie-feign
-    upload:
-      path: /ul/**
-      serviceId: micro-upload
+#  routes:
+#    user:
+#      serviceId: micro-server2-hystrix-user
+#      path: /usr/**
+#    movie:
+#      serviceId: micro-server2-hystrix-movie-feign
+#      path: /mvi/**
+#    upload:
+#      serviceId: micro-server4-upload
+#      path: /ul/**
 
   #三，
   #此种方式的请求，不会被HystrixComond监控，同时不会被ribbon进行负载均衡。

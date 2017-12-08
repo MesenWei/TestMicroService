@@ -1,6 +1,10 @@
 server:
   port: 7806
 
+security:
+  basic:
+    enabled: true
+
 spring:
   http:
     multipart:
@@ -10,7 +14,7 @@ spring:
       file-size-threshold: 1MB  # 当上传文件达到1MB的时候进行磁盘写入
       location: /  # 上传的临时目录
   application:
-    name: micro-upload
+    name: micro-server4-upload
 
 eureka:
   instance:
@@ -22,10 +26,6 @@ eureka:
       defaultZone: http://admin:admin123@localhost:8761/eureka
     healthcheck:
       enable: true
-
-logging:
-  level:
-    com.netflix: DEBUG
 
 hystrix:
   command:

@@ -72,12 +72,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+
         if(!checkWebSecurityIsAlow())
             return;
-
         System.out.println("设置session状态为无状态。");
         // 表示所有的访问都必须进行认证处理后才可以正常进行
-        http.httpBasic().and().authorizeRequests().anyRequest().fullyAuthenticated();
+        http.httpBasic().and().authorizeRequests().anyRequest().fullyAuthenticated().and();
         // 所有的Rest服务一定要设置为无状态，以提升操作性能
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
