@@ -31,6 +31,7 @@
         <module>ms3-hystrix-turbine</module>
         <module>ms4-gateway-zuul</module>
         <module>ms4-upload</module>
+        <module>ms5-springcloudconfig</module>
     </modules>
 
 	<properties>

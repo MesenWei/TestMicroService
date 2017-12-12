@@ -1,0 +1,14 @@
+server:
+  port: 7101
+
+spring:
+  application:
+    name: micro-server4-config
+  cloud:  # 进行SpringCloud的相关配置
+    config: # 进行SpringCloudConfig的相关配置
+      server: # 配置版本控制工具
+        git:  # 本次使用的是GIT作为仓库的管理，所以需要设置GIT的连接地址
+          uri: https://github.com/MesenWei/microcloud-config.git # Git仓库的项目路径
+          search-paths: springbootyml
+          username: kuimaosheng@126.com
+          password: 787500343gg8
