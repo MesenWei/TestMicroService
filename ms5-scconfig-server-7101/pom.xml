@@ -25,7 +25,7 @@
             <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency>-->
 
-        <!--config也是一个springboot程序，他是一个config服务。-->
+        <!--config也是一个springboot程序，他是一个config server端服务。-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
