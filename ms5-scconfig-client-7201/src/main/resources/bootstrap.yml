@@ -1,5 +1,5 @@
 #bootstrap.yml与application.yml配置文件的区别：
-#1.application.yml是用户级的配置文件；bootstrap.yml是系统级的配置文件，其优先级要高于bootstrap.yml。
+#1.application.yml是用户级的配置文件；bootstrap.yml是系统级的配置文件，其优先级要高于application.yml。
 #
 #在使用springcloud config工具后，springcloud官方建议我们使用bootstrap.yml文件进行微服务的相关配置。
 #

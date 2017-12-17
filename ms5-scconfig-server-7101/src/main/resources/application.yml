@@ -1,6 +1,5 @@
 server:
-              port: 7101
-
+  port: 7101
 spring:
   application:
     name: micro-server5-scconfig-server
@@ -12,3 +11,9 @@ spring:
           search-paths: springbootyml
           username: kuimaosheng@126.com
           password: 787500343gg8
+#security:
+#  basic:
+#    enabled: true
+#  user:
+#    name: config
+#    password: config123
