@@ -1,0 +1,12 @@
+微服务端口
+普通微服务：
+    7101-7200
+dashboard：
+    7201-7300
+turbine：
+    7301-7400
+gateway：
+    80
+eureka：
+    普通微服务eureka：8761-8780
+    springcloud config eureka：8781-8790

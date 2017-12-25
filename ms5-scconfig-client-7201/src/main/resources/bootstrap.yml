@@ -1,0 +1,16 @@
+#bootstrap.yml与application.yml配置文件的区别：
+#1.application.yml是用户级的配置文件；bootstrap.yml是系统级的配置文件，其优先级要高于application.yml。
+#
+#在使用springcloud config工具后，springcloud官方建议我们使用bootstrap.yml文件进行微服务的相关配置。
+#
+spring:
+  cloud:
+    #springcloud config server 服务是用来连接版本控制工具，springcloud config client中此处配置，
+    #是告诉springcloud config server 服务我要版本控制工具中的哪些内容。
+    config:
+      name: ms5-scconfig-client    # 定义要读取的资源文件的名称。TODO 此处做出规范：版本控制工具中的资源文件名称与其配置的spring.application.name值与微服务的根目录名称去掉端口号三者必须相同。
+      profile: pro      # 定义profile的 名称
+      label: master     # 定义配置文件所在的分支
+      uri: http://localhost:7101    #springcloud config server 服务的地址
+#      username: admin   #springcloud config server 服务的用户名
+#      password: admin123    #springcloud config server 服务的密码
