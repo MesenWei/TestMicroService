@@ -30,9 +30,9 @@ public class ExceptionAutowired {
         return this.serverId;
     }
 
-    public PageVo autoWired(Optional<Throwable> optional){
+    public PageVo autoWired(Optional<Throwable> throwableOpl){
         try {
-            throw optional.get();
+            throw throwableOpl.get();
         } catch (RetryableException e){
             return serverDown(e);
         } catch (HystrixTimeoutException e) {
@@ -43,12 +43,12 @@ public class ExceptionAutowired {
             return customizeException(e);
         } catch (Throwable e) {
             e.printStackTrace();
-            return unDisposeException();
+            return unCatchException();
         }
     }
 
     /**
-     * 服务生产端宕机。
+     * 某个服务生产端宕机。
      *
      * @param e
      * @return
@@ -74,7 +74,7 @@ public class ExceptionAutowired {
      *
      * @return
      */
-    private PageVo unDisposeException(){
+    private PageVo unCatchException(){
         return new PageVo(getServerId(),"-3","一个controller未捕获的未知异常！");
     }
 
