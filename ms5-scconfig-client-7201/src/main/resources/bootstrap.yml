@@ -12,5 +12,5 @@ spring:
       profile: pro      # 定义profile的 名称
       label: master     # 定义配置文件所在的分支
       uri: http://localhost:7101    #springcloud config server 服务的地址
-#      username: admin   #springcloud config server 服务的用户名
-#      password: admin123    #springcloud config server 服务的密码
+      username: admin   #springcloud config server 服务的用户名
+      password: admin123    #springcloud config server 服务的密码

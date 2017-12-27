@@ -1,0 +1,4 @@
+1.获取版本控制工具中配置文件的url http://IP:PORT/ApplicationName-profile.yml：
+    http://localhost:7101/ms5-scconfig-client-user-dev.yml
+2.获取按密钥机进行加密密码的url：
+    http://localhost:7101/encrypt -d

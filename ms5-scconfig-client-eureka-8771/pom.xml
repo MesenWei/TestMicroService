@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <version>0.0.1-SNAPSHOT</version>
-    <artifactId>ms-scconfig-client-eureka</artifactId>
+    <artifactId>ms5-scconfig-client-eureka</artifactId>
 
     <dependencies>
         <dependency>

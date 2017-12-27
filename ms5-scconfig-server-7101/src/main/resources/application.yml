@@ -8,12 +8,22 @@ spring:
       server: # 配置版本控制工具
         git:  # 本次使用的是GIT作为仓库的管理，所以需要设置GIT的连接地址
           uri: https://github.com/MesenWei/microcloud-config.git # Git仓库的项目路径
-          search-paths: springbootyml
+          # Git仓库的项目路径，这种情况适用于在版本控制工具中有多个仓库的形式：
+          #将仓库名称与spring.application.name名称保持一致，即可使用https://github.com/MesenWei/{application} 的形式，
+          #来完成通过spring.application.name自动选择多个仓库。但是
+          #不推荐使用，麻烦，不如我们把所有配置文件放到一个仓库中，通过多个文件夹来区分，以此来代替多仓库。
+          #uri: https://github.com/MesenWei/{application}
+
+          #仓库路径通配符：
+          #有时候我们可能有需求每个微服务的配置文件单独放在一个文件夹中，此时可以通过下面通配符的形式来实现。
+          search-paths: springbootyml/ms5-scconfig-client-*
           username: kuimaosheng@126.com
           password: 787500343gg8
-#security:
-#  basic:
-#    enabled: true
-#  user:
-#    name: config
-#    password: config123
+security:
+  basic:
+    enabled: true
+  user:
+    name: config
+    password: config123
+encrypt:
+  key: maosheng #以此key作为加密密钥，对所有密码进行加密。使用前需要对jdk进行JCE更换处理。

@@ -5,5 +5,5 @@ spring:
       profile: pro
       label: master
       uri: http://localhost:7101
-#      username: config
-#      password: config123
+      username: config
+      password: config123
