@@ -31,18 +31,21 @@
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
 
+        <!--测试加密功能，不使用commons中提供的，因为加密的功能将来要单独提取出来-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
         <!--TODO 我们应当把spring security单独提取出来作为一个公共springboot服务。-->
 
     </dependencies>
 
     <build>
         <resources>
-            <resource>
+            <resource>	 <!-- 访问JSK被Maven过掉 -->
                 <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*.yml</include>
-                </includes>
+                <filtering>false</filtering>
             </resource>
         </resources>
         <plugins>

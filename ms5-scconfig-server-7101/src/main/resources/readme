@@ -1,0 +1,2 @@
+key store 生成命令
+keytool -genkeypair -alias mytestkey -keyalg RSA -dname "CN=spring cloud server,OU=unis,O=normal org,L=Beijing,S=Beijing,C=CN" -keypass maosheng -keystore server.jks -storepass store123

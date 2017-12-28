@@ -1,4 +1,15 @@
 1.获取版本控制工具中配置文件的url http://IP:PORT/ApplicationName-profile.yml：
     http://localhost:7101/ms5-scconfig-client-user-dev.yml
-2.获取按密钥机进行加密密码的url：
-    http://localhost:7101/encrypt -d
+2.加密获取按密钥机进行加密密码的url：
+    curl -X POST http://config:config123@localhost:7101/encrypt -d ******
+3.加密获取按密钥机进行解密密码的url：
+    curl -X POST http://config:config123@localhost:7101/decrypt -d ******
+    2和3没有测试成功，未找到原因。错误信息：{"description":"No key was installed for encryption service","status":"NO_KEY"}
+4.非对称加密
+    1.生成key store：
+        keytool -genkeypair -alias mytestkey -keyalg RSA \
+          -dname "CN=spring cloud server,OU=unis,O=normal org,L=Beijing,S=Beijing,C=CN" \
+          -keypass maosheng -keystore server.jks -storepass store123
+        说明：在window中命令不能用被换行，linux中命令如果太长可以使用反斜杠进行换行。
+        keytool -genkeypair -alias mytestkey -keyalg RSA -dname "CN=spring cloud server,OU=unis,O=normal org,L=Beijing,S=Beijing,C=CN" -keypass maosheng -keystore server.jks -storepass store123
+    2.加密解密的请求路径与对称的一样，此处略。
