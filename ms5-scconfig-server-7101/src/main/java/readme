@@ -4,7 +4,6 @@
     curl -X POST http://config:config123@localhost:7101/encrypt -d ******
 3.加密获取按密钥机进行解密密码的url：
     curl -X POST http://config:config123@localhost:7101/decrypt -d ******
-    2和3没有测试成功，未找到原因。错误信息：{"description":"No key was installed for encryption service","status":"NO_KEY"}
 4.非对称加密
     1.生成key store：
         keytool -genkeypair -alias mytestkey -keyalg RSA \

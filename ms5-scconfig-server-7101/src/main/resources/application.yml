@@ -25,16 +25,3 @@ spring:
           search-paths: springbootyml/ms5-scconfig-client-*
           username: kuimaosheng@126.com
           password: 787500343gg8
-
-#TODO 不知道为什么，对称加密的这种配置方式，无法测试成功。错误信息：{"description":"No key was installed for encryption service","status":"NO_KEY"}。
-#encrypt:
-#  key: maosheng #以此key作为加密密钥，对所有密码进行加密。使用前需要对jdk进行JCE更换处理。
-#keytool -genkeypair -alias mytestkey -keyalg RSA
-#-dname "CN=spring cloud server,OU=unis,O=normal org,L=Beijing,S=Beijing,C=CN"
-#-keypass maosheng -keystore server.jks -storepass store123
-encrypt:
-  keyStore:
-    location: classpath:/server.jks
-    password: store123 #key store的密码
-    alias: mytestkey #key store的别名
-    secret: maosheng #所有密码的密钥

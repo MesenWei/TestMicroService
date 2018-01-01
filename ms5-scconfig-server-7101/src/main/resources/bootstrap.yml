@@ -1,0 +1,13 @@
+#所有encrypt开头的配置，都必须配置在全局配置文件bootstrap.yml中。这个规则是从dalston sr2开始的规则。
+
+#encrypt:
+#  key: maosheng #以此key作为加密密钥，对所有密码进行加密。使用前需要对jdk进行JCE更换处理。
+#keytool -genkeypair -alias mytestkey -keyalg RSA
+#-dname "CN=spring cloud server,OU=unis,O=normal org,L=Beijing,S=Beijing,C=CN"
+#-keypass maosheng -keystore server.jks -storepass store123
+encrypt:
+  keyStore:
+    location: classpath:/server.jks
+    password: store123 #key store的密码
+    alias: mytestkey #key store的别名
+    secret: maosheng #所有密码的密钥
