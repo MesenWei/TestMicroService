@@ -36,6 +36,9 @@
         <module>ms5-scconfig-client-eureka-8771</module>
 		<module>ms5-scconfig-client-user-7202</module>
         <module>ms5-scconfig-client-manualrefresh-7203</module>
+        <module>ms5-scconfig-eureka-8772</module>
+        <module>ms5-scconfig-server-ha-7104</module>
+        <module>ms5-scconfig-client-ha-7204</module>
     </modules>
 
 	<properties>

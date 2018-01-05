@@ -1,0 +1,26 @@
+server:
+  port: 7104
+
+spring:
+  application:
+    name: ms5-scconfig-server-ha
+  cloud:
+      config:
+        server:
+          git:
+            uri: https://github.com/MesenWei/microcloud-config.git # Git仓库的项目路径
+            search-paths: springbootyml/ms5-scconfig-client-*
+            username: kuimaosheng@126.com
+            password: 787500343gg8
+
+eureka:
+  instance:
+      hostname: localhost
+      prefer-ip-address: true
+      instance-id: ${spring.application.name}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin123@localhost:8772/eureka
+    healthcheck:
+      enable: true
+

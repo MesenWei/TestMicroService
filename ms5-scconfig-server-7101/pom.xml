@@ -19,12 +19,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--config需要单独注册到一套eureka中去-->
-        <!--<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
-        </dependency>-->
-
         <!--config也是一个springboot程序，他是一个config server端服务。-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

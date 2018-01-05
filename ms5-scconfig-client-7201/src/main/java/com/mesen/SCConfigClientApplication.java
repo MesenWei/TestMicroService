@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * Created by maosheng on 2017/12/11
  */
-
 @SpringBootApplication
 public class SCConfigClientApplication {
     public static void main(String[] args) {
