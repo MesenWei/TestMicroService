@@ -35,7 +35,8 @@
         <module>ms5-scconfig-client-7201</module>
         <module>ms5-scconfig-client-eureka-8771</module>
 		<module>ms5-scconfig-client-user-7202</module>
-	</modules>
+        <module>ms5-scconfig-client-manualrefresh-7203</module>
+    </modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

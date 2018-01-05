@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    config:
+      name: ms5-scconfig-client-manualrefresh
+      profile: pro
+      label: master
+      uri: http://localhost:7101
+      username: config
+      password: config123

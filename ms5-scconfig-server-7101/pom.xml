@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ms5-springcloudconfig</artifactId>
+    <artifactId>ms5-springcloudconfig-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
@@ -43,7 +43,7 @@
 
     <build>
         <resources>
-            <resource>	 <!-- 访问JSK被Maven过掉 -->
+            <resource>	 <!-- 防止JSK在打包时被Maven过掉 -->
                 <directory>src/main/resources</directory>
                 <filtering>false</filtering>
             </resource>

@@ -6,20 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ConfigClientRest {
-	/**
-	 * 应用的服务名称
-	 */
-	@Value("${spring.application.name}")
-	private String applicationName;
 
-	/**
-	 * eureka服务端的地址
-	 */
-	@Value("${eureka.client.service-url.defaultZone}")
-	private String eurekaServers;
 
-	@RequestMapping("/config")
-	public String getConfig() {
-		return "ApplicationName = " + this.applicationName + "、EurekaServers = " + this.eurekaServers;
-	}
 }
