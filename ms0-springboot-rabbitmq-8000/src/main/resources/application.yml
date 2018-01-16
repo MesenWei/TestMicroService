@@ -1,0 +1,16 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: micro-server-springboot-rabbitmq
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin123
+
+info:
+  app.name: 用户微服务
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$

@@ -39,7 +39,8 @@
         <module>ms5-scconfig-eureka-8772</module>
         <module>ms5-scconfig-server-ha-7104</module>
         <module>ms5-scconfig-client-ha-7204</module>
-    </modules>
+		<module>ms0-springboot-rabbitmq-8000</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
